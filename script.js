@@ -40,6 +40,10 @@ pauseButton.addEventListener("click", () => {
   trexRoar.pause();
 });
 
-setInterval(() => {
-  console.log("Current time of the audio:", trexRoar.currentTime, "seconds");
-}, 1_000);
+const progressBar = document.getElementById("progress-bar");
+trexRoar.addEventListener("timeupdate", () => {
+  if (duration) {
+    const progress = (trexRoar.currentTime / duration) * 100;
+    progressBar.style.width = `${progress}%`;
+  }
+});
