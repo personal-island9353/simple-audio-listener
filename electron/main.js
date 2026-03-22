@@ -7,12 +7,36 @@ if (started) {
   app.quit();
 }
 
+// Set AppUserModelID on Windows so the correct icon is used in taskbar
+if (process.platform === "win32") {
+  try {
+    app.setAppUserModelId("personal-island9353.simple-audio-listener");
+  } catch {
+    // ignore; older Electron versions may not support this
+  }
+}
+
 const createWindow = () => {
   // Create the browser window.
+  // app.getAppPath() returns the project root in dev mode and the asar path when
+  // packaged.  For packaged builds the .ico is copied to process.resourcesPath
+  // via extraResources in forge.config.js.
+  let iconPath;
+  if (process.platform === "win32") {
+    iconPath = app.isPackaged
+      ? path.join(process.resourcesPath, "setup-icon.ico")
+      : path.join(app.getAppPath(), "assets", "setup-icon.ico");
+  } else {
+    iconPath = app.isPackaged
+      ? path.join(app.getAppPath(), "assets", "icon.png")
+      : path.join(app.getAppPath(), "assets", "icon.png");
+  }
+
   const mainWindow = new BrowserWindow({
     width: 1400,
     height: 960,
     show: false,
+    icon: iconPath,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },

@@ -5,14 +5,23 @@ import { MakerZIP } from "@electron-forge/maker-zip";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { VitePlugin } from "@electron-forge/plugin-vite";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
+import path from "node:path";
+
+const __dirname = import.meta.dirname;
 
 const config = {
   packagerConfig: {
     asar: true,
+    icon: path.join(__dirname, "assets/setup-icon"),
+    extraResource: [path.join(__dirname, "assets/setup-icon.ico")],
   },
   rebuildConfig: {},
   makers: [
-    new MakerSquirrel({}),
+    new MakerSquirrel({
+      name: "SimpleAudioListener",
+      setupIcon: path.join(__dirname, "assets/setup-icon.ico"),
+      loadingGif: path.join(__dirname, "assets/setup-loading.gif"),
+    }),
     new MakerZIP({}, ["darwin"]),
     new MakerRpm({}),
     new MakerDeb({}),
