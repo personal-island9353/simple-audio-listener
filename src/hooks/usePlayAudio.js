@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 function usePlayAudio(audioUrl) {
-  const audio = useMemo(() => new Audio(audioUrl), [audioUrl]);
+  const audio = useRef(new Audio(audioUrl));
 
   const [playing, setPlaying] = useState(false);
   const duration = useRef(null);
   const progressBar = useRef(null);
 
   const onLoadedData = useCallback(() => {
-    duration.current = audio.duration;
+    duration.current = audio.current.duration;
     console.log("Duration of the audio:", duration.current, "seconds");
   }, [audio]);
 
@@ -29,38 +29,44 @@ function usePlayAudio(audioUrl) {
 
   const onTimeUpdate = useCallback(() => {
     if (duration.current) {
-      const progress = (audio.currentTime / duration.current) * 100;
+      const progress = (audio.current.currentTime / duration.current) * 100;
       progressBar.current.style.width = `${progress}%`;
     }
-  }, [audio]);
+  }, []);
 
   useEffect(() => {
-    audio.addEventListener("loadeddata", onLoadedData);
-    audio.addEventListener("ended", onEnded);
-    audio.addEventListener("pause", onPaused);
-    audio.addEventListener("play", onPlaying);
-    audio.addEventListener("timeupdate", onTimeUpdate);
+    const currentAudio = audio.current;
+
+    currentAudio.addEventListener("loadeddata", onLoadedData);
+    currentAudio.addEventListener("ended", onEnded);
+    currentAudio.addEventListener("pause", onPaused);
+    currentAudio.addEventListener("play", onPlaying);
+    currentAudio.addEventListener("timeupdate", onTimeUpdate);
 
     return () => {
-      audio.removeEventListener("loadeddata", onLoadedData);
-      audio.removeEventListener("ended", onEnded);
-      audio.removeEventListener("pause", onPaused);
-      audio.removeEventListener("play", onPlaying);
-      audio.removeEventListener("timeupdate", onTimeUpdate);
+      currentAudio.removeEventListener("loadeddata", onLoadedData);
+      currentAudio.removeEventListener("ended", onEnded);
+      currentAudio.removeEventListener("pause", onPaused);
+      currentAudio.removeEventListener("play", onPlaying);
+      currentAudio.removeEventListener("timeupdate", onTimeUpdate);
     };
-  }, [audio, onLoadedData, onEnded, onPaused, onPlaying, onTimeUpdate]);
+  }, [onLoadedData, onEnded, onPaused, onPlaying, onTimeUpdate]);
 
   const play = useCallback(() => {
-    audio.play().catch((error) => {
+    audio.current.play().catch((error) => {
       console.error("Error playing audio:", error);
     });
-  }, [audio]);
+  }, []);
 
   const pause = useCallback(() => {
-    audio.pause();
-  }, [audio]);
+    audio.current.pause();
+  }, []);
 
-  return { play, pause, playing, progressBar };
+  const setVolume = useCallback((volume) => {
+    audio.current.volume = volume;
+  }, []);
+
+  return { play, pause, playing, progressBar, setVolume };
 }
 
 export default usePlayAudio;

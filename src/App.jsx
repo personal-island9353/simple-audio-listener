@@ -1,18 +1,22 @@
-import "@/App.css";
+import styles from "@/App.module.css";
+import PlayButton from "@/components/PlayButton";
+import ProgressBar from "@/components/ProgressBar";
+import VolumeControl from "@/components/VolumeControl";
 import usePlayAudio from "@/hooks/usePlayAudio";
-import PlayButton from "./components/PlayButton";
-import ProgressBar from "./components/ProgressBar";
 
 function App() {
-  const { play, pause, playing, progressBar } = usePlayAudio(
+  const { play, pause, playing, progressBar, setVolume } = usePlayAudio(
     "https://c230d4b3-f964-4b0a-a322-70bab20c258a.mdnplay.dev/shared-assets/audio/t-rex-roar.mp3",
   );
 
   return (
-    <>
+    <div className={styles.player}>
       <ProgressBar progressBar={progressBar} />
-      <PlayButton play={play} pause={pause} playing={playing} />
-    </>
+      <div className={styles.controls}>
+        <PlayButton play={play} pause={pause} playing={playing} />
+        <VolumeControl setVolume={setVolume} />
+      </div>
+    </div>
   );
 }
 
