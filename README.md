@@ -1,12 +1,13 @@
 # Simple Audio Listener
 
-A tiny React + Vite + Electron audio player demo.
+> A minimal React + Vite + Electron demo that plays audio with simple controls.
 
 **Features**
 
 - Play / Pause / Stop controls
-- Seek and progress bar
-- Simple hook-based audio management (`src/hooks/usePlayAudio.js`)
+- Seekable progress bar and duration display
+- Volume control and keyboard-friendly buttons
+- Hook-based audio logic in src/hooks/usePlayAudio.js
 
 **Quick start**
 
@@ -16,30 +17,46 @@ A tiny React + Vite + Electron audio player demo.
 npm install
 ```
 
-2. Start dev server
+2. Run the app (development)
 
 ```bash
-npm run dev
-# open http://localhost:5173
+npm start
 ```
 
-3. Build for production
+3. Package the app
 
 ```bash
-npm run build
+npm run package
 ```
 
-4. Preview the production build
+4. Create distributable builds
 
 ```bash
-npm run preview
+npm run make
 ```
 
-**Notes for contributors**
+**Optional commands**
 
-- Entry HTML: [index.html](index.html#L1-L14)
-- Main entry: `src/main.jsx`
-- Hook that manages audio: [src/hooks/usePlayAudio.js](src/hooks/usePlayAudio.js)
-- Favicon (SVG): [public/favicon.svg](public/favicon.svg)
+```bash
+# Lint source
+npm run lint
 
-License: see `LICENSE` in the repository root.
+# Format files
+npm run format
+```
+
+**Project layout**
+
+- [index.html](index.html#L1-L14) — App shell
+- [src/main.jsx](src/main.jsx) — App entry (renderer)
+- [src/hooks/usePlayAudio.js](src/hooks/usePlayAudio.js) — Audio management hook
+- [src/components](src/components) — UI controls and components
+
+**Contributing**
+
+- Open an issue for feature requests or bugs.
+- Send pull requests against `main`. Keep changes focused and documented.
+
+**License**
+
+See [LICENSE](LICENSE) for details.
