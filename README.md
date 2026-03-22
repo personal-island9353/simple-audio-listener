@@ -1,16 +1,45 @@
-# React + Vite
+# Simple Audio Listener
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A tiny React + Vite audio player demo.
 
-Currently, two official plugins are available:
+**Features**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Play / Pause / Stop controls
+- Seek and progress bar
+- Simple hook-based audio management (`src/hooks/usePlayAudio.js`)
 
-## React Compiler
+**Quick start**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Install dependencies
 
-## Expanding the ESLint configuration
+```bash
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+2. Start dev server
+
+```bash
+npm run dev
+# open http://localhost:5173
+```
+
+3. Build for production
+
+```bash
+npm run build
+```
+
+4. Preview the production build
+
+```bash
+npm run preview
+```
+
+**Notes for contributors**
+
+- Entry HTML: [index.html](index.html#L1-L14)
+- Main entry: `src/main.jsx`
+- Hook that manages audio: [src/hooks/usePlayAudio.js](src/hooks/usePlayAudio.js)
+- Favicon (SVG): [public/favicon.svg](public/favicon.svg)
+
+License: see `LICENSE` in the repository root.
