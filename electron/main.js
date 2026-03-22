@@ -5,7 +5,7 @@ const createWindow = () => {
   // Create the browser window.
   // app.getAppPath() returns the project root in dev mode and the asar path when
   // packaged.  For packaged builds the .ico is copied to process.resourcesPath
-  // via extraResources in forge.config.js.
+  // via extraResources in electron-builder.json (package.json "build").
   let iconPath;
   if (process.platform === "win32") {
     iconPath = app.isPackaged
@@ -33,13 +33,11 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
-    mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
+  if (process.env.VITE_DEV_SERVER_URL) {
+    mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
     mainWindow.webContents.openDevTools();
   } else {
-    mainWindow.loadFile(
-      path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
-    );
+    mainWindow.loadFile(path.join(__dirname, "../dist/index.html"));
   }
 };
 
