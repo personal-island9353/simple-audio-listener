@@ -6,10 +6,13 @@ function usePlayAudio(audioUrl) {
   const [playing, setPlaying] = useState(false);
   const duration = useRef(null);
   const progressBar = useRef(null);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [totalDuration, setTotalDuration] = useState(0);
 
   const onLoadedData = useCallback(() => {
     duration.current = audio.current.duration;
     console.log("Duration of the audio:", duration.current, "seconds");
+    setTotalDuration(duration.current);
   }, [audio]);
 
   const onEnded = useCallback(() => {
@@ -31,6 +34,7 @@ function usePlayAudio(audioUrl) {
     if (duration.current) {
       const progress = (audio.current.currentTime / duration.current) * 100;
       progressBar.current.style.width = `${progress}%`;
+      setCurrentTime(audio.current.currentTime || 0);
     }
   }, []);
 
@@ -73,7 +77,16 @@ function usePlayAudio(audioUrl) {
     }
   }, []);
 
-  return { play, pause, playing, progressBar, setVolume, seek };
+  return {
+    play,
+    pause,
+    playing,
+    progressBar,
+    setVolume,
+    seek,
+    currentTime,
+    duration: totalDuration,
+  };
 }
 
 export default usePlayAudio;

@@ -5,7 +5,16 @@ import VolumeControl from "@/components/VolumeControl";
 import usePlayAudio from "@/hooks/usePlayAudio";
 
 function App() {
-  const { play, pause, playing, progressBar, setVolume, seek } = usePlayAudio(
+  const {
+    play,
+    pause,
+    playing,
+    progressBar,
+    setVolume,
+    seek,
+    currentTime,
+    duration,
+  } = usePlayAudio(
     "https://c230d4b3-f964-4b0a-a322-70bab20c258a.mdnplay.dev/shared-assets/audio/t-rex-roar.mp3",
   );
 
@@ -15,6 +24,9 @@ function App() {
       <div className={styles.controls}>
         <PlayButton play={play} pause={pause} playing={playing} />
         <VolumeControl setVolume={setVolume} />
+        <div className={styles.time}>
+          {currentTime.toFixed(2)} / {duration.toFixed(2)} seconds
+        </div>
       </div>
     </div>
   );
