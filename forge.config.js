@@ -22,7 +22,7 @@ const config = {
       setupIcon: path.join(__dirname, "assets/setup-icon.ico"),
       loadingGif: path.join(__dirname, "assets/setup-loading.gif"),
     }),
-    new MakerZIP({}, ["darwin"]),
+    new MakerZIP({}, ["darwin", "win32", "linux"]),
     new MakerRpm({}),
     new MakerDeb({}),
   ],

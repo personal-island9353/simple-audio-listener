@@ -7,13 +7,8 @@ if (started) {
   app.quit();
 }
 
-// Set AppUserModelID on Windows so the correct icon is used in taskbar
 if (process.platform === "win32") {
-  try {
-    app.setAppUserModelId("personal-island9353.simple-audio-listener");
-  } catch {
-    // ignore; older Electron versions may not support this
-  }
+  app.setAppUserModelId("com.squirrel.SimpleAudioListener.SimpleAudioListener");
 }
 
 const createWindow = () => {
