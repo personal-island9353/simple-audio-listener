@@ -29,7 +29,11 @@ export default defineConfig([
   {
     files: ["electron/**/*.js"],
     languageOptions: {
-      globals: globals.node,
+      globals: {
+        ...globals.node,
+        MAIN_WINDOW_VITE_DEV_SERVER_URL: "readonly",
+        MAIN_WINDOW_VITE_NAME: "readonly",
+      },
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
