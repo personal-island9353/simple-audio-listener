@@ -66,7 +66,14 @@ function usePlayAudio(audioUrl) {
     audio.current.volume = volume;
   }, []);
 
-  return { play, pause, playing, progressBar, setVolume };
+  const seek = useCallback((percentage) => {
+    if (duration.current) {
+      const newTime = percentage * duration.current;
+      audio.current.currentTime = newTime;
+    }
+  }, []);
+
+  return { play, pause, playing, progressBar, setVolume, seek };
 }
 
 export default usePlayAudio;
