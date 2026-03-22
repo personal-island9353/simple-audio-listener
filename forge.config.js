@@ -1,6 +1,3 @@
-import { MakerDeb } from "@electron-forge/maker-deb";
-import { MakerRpm } from "@electron-forge/maker-rpm";
-import { MakerSquirrel } from "@electron-forge/maker-squirrel";
 import { MakerZIP } from "@electron-forge/maker-zip";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { VitePlugin } from "@electron-forge/plugin-vite";
@@ -16,16 +13,7 @@ const config = {
     extraResource: [path.join(__dirname, "assets/setup-icon.ico")],
   },
   rebuildConfig: {},
-  makers: [
-    new MakerSquirrel({
-      name: "SimpleAudioListener",
-      setupIcon: path.join(__dirname, "assets/setup-icon.ico"),
-      loadingGif: path.join(__dirname, "assets/setup-loading.gif"),
-    }),
-    new MakerZIP({}, ["darwin", "win32", "linux"]),
-    new MakerRpm({}),
-    new MakerDeb({}),
-  ],
+  makers: [new MakerZIP({}, ["darwin", "win32", "linux"])],
   plugins: [
     new VitePlugin({
       // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.

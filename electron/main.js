@@ -1,15 +1,5 @@
 const { app, BrowserWindow } = require("electron");
-const started = require("electron-squirrel-startup");
 const path = require("node:path");
-
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (started) {
-  app.quit();
-}
-
-if (process.platform === "win32") {
-  app.setAppUserModelId("com.squirrel.SimpleAudioListener.SimpleAudioListener");
-}
 
 const createWindow = () => {
   // Create the browser window.
