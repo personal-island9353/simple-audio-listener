@@ -5,6 +5,7 @@ import ProgressBar from "@/components/ProgressBar";
 import StopButton from "@/components/StopButton";
 import VolumeControl from "@/components/VolumeControl";
 import usePlayAudio from "@/hooks/usePlayAudio";
+import formatTime from "@/utils/formatTime";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
         <StopButton stop={stop} />
         <VolumeControl setVolume={setVolume} />
         <div className={styles.time}>
-          {currentTime.toFixed(2)} / {duration.toFixed(2)} seconds
+          {formatTime(currentTime)} / {formatTime(duration)}
         </div>
       </div>
     </div>
