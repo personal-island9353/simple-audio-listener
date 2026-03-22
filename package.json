@@ -2,8 +2,12 @@
   "name": "simple-audio-listener",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "main": ".vite/build/main.js",
+  "author": {
+    "email": "personal.island9353@gmail.com",
+    "name": "Personal_Island9353"
+  },
+  "description": "A tiny React + Vite audio player demo.",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",

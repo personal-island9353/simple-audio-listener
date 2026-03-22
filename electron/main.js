@@ -1,6 +1,6 @@
-import { app, BrowserWindow } from "electron";
-import started from "electron-squirrel-startup";
-import path from "node:path";
+const { app, BrowserWindow } = require("electron");
+const started = require("electron-squirrel-startup");
+const path = require("node:path");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {

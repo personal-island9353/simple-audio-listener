@@ -1,6 +1,6 @@
 # Simple Audio Listener
 
-A tiny React + Vite audio player demo.
+A tiny React + Vite + Electron audio player demo.
 
 **Features**
 
