@@ -1,6 +1,7 @@
 import styles from "@/App.module.css";
 import PlayButton from "@/components/PlayButton";
 import ProgressBar from "@/components/ProgressBar";
+import StopButton from "@/components/StopButton";
 import VolumeControl from "@/components/VolumeControl";
 import usePlayAudio from "@/hooks/usePlayAudio";
 
@@ -8,6 +9,7 @@ function App() {
   const {
     play,
     pause,
+    stop,
     playing,
     progressBar,
     setVolume,
@@ -23,6 +25,7 @@ function App() {
       <ProgressBar progressBar={progressBar} seek={seek} />
       <div className={styles.controls}>
         <PlayButton play={play} pause={pause} playing={playing} />
+        <StopButton stop={stop} />
         <VolumeControl setVolume={setVolume} />
         <div className={styles.time}>
           {currentTime.toFixed(2)} / {duration.toFixed(2)} seconds

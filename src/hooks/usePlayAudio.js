@@ -66,6 +66,12 @@ function usePlayAudio(audioUrl) {
     audio.current.pause();
   }, []);
 
+  const stop = useCallback(() => {
+    audio.current.pause();
+    audio.current.currentTime = 0;
+    setCurrentTime(0);
+  }, []);
+
   const setVolume = useCallback((volume) => {
     audio.current.volume = volume;
   }, []);
@@ -80,6 +86,7 @@ function usePlayAudio(audioUrl) {
   return {
     play,
     pause,
+    stop,
     playing,
     progressBar,
     setVolume,

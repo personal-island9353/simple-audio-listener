@@ -1,6 +1,6 @@
 import styles from "@/components/PlayButton.module.css";
+import Pause from "@/icons/Pause";
 import Play from "@/icons/Play";
-import Pause from "../icons/Pause";
 
 function PlayButton({ play, pause, playing }) {
   return (
