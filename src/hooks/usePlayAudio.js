@@ -11,23 +11,19 @@ function usePlayAudio(audioUrl) {
 
   const onLoadedData = useCallback(() => {
     duration.current = audio.current.duration;
-    console.log("Duration of the audio:", duration.current, "seconds");
     setTotalDuration(duration.current);
   }, []);
 
   const onEnded = useCallback(() => {
     setPlaying(false);
-    console.log("Audio has ended");
   }, []);
 
   const onPaused = useCallback(() => {
     setPlaying(false);
-    console.log("Audio is paused");
   }, []);
 
   const onPlaying = useCallback(() => {
     setPlaying(true);
-    console.log("Audio is playing");
   }, []);
 
   const onTimeUpdate = useCallback(() => {
