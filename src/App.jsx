@@ -1,7 +1,6 @@
 import "@/App.css";
 import usePlayAudio from "@/hooks/usePlayAudio";
-import Pause from "@/icons/Pause";
-import Play from "@/icons/Play";
+import PlayButton from "./components/PlayButton";
 import ProgressBar from "./components/ProgressBar";
 
 function App() {
@@ -12,20 +11,7 @@ function App() {
   return (
     <>
       <ProgressBar progressBar={progressBar} />
-      <button
-        className={`play-button ${playing ? "hidden" : ""}`}
-        onClick={play}
-        aria-label="Play"
-      >
-        <Play />
-      </button>
-      <button
-        className={`pause-button ${playing ? "" : "hidden"}`}
-        onClick={pause}
-        aria-label="Pause"
-      >
-        <Pause />
-      </button>
+      <PlayButton play={play} pause={pause} playing={playing} />
     </>
   );
 }
