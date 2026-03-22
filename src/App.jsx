@@ -4,8 +4,13 @@ import ProgressBar from "@/components/ProgressBar";
 import StopButton from "@/components/StopButton";
 import VolumeControl from "@/components/VolumeControl";
 import usePlayAudio from "@/hooks/usePlayAudio";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [audio, setAudio] = useState(
+    "https://c230d4b3-f964-4b0a-a322-70bab20c258a.mdnplay.dev/shared-assets/audio/t-rex-roar.mp3",
+  );
+
   const {
     play,
     pause,
@@ -16,12 +21,25 @@ function App() {
     seek,
     currentTime,
     duration,
-  } = usePlayAudio(
-    "https://c230d4b3-f964-4b0a-a322-70bab20c258a.mdnplay.dev/shared-assets/audio/t-rex-roar.mp3",
-  );
+    changeAudio,
+  } = usePlayAudio(audio);
+
+  useEffect(() => {
+    changeAudio(audio);
+  }, [audio, changeAudio]);
 
   return (
     <div className={styles.player}>
+      <label htmlFor="audioInput" className={styles.audioLabel}>
+        Audio URL:
+      </label>
+      <input
+        id="audioInput"
+        className={styles.audioInput}
+        type="text"
+        value={audio}
+        onChange={(e) => setAudio(e.target.value)}
+      />
       <ProgressBar progressBar={progressBar} seek={seek} />
       <div className={styles.controls}>
         <PlayButton play={play} pause={pause} playing={playing} />

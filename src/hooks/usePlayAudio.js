@@ -13,7 +13,7 @@ function usePlayAudio(audioUrl) {
     duration.current = audio.current.duration;
     console.log("Duration of the audio:", duration.current, "seconds");
     setTotalDuration(duration.current);
-  }, [audio]);
+  }, []);
 
   const onEnded = useCallback(() => {
     setPlaying(false);
@@ -83,6 +83,31 @@ function usePlayAudio(audioUrl) {
     }
   }, []);
 
+  const changeAudio = useCallback(
+    (newUrl) => {
+      const prev = audio.current;
+      if (prev) {
+        prev.pause();
+        prev.removeEventListener("loadeddata", onLoadedData);
+        prev.removeEventListener("ended", onEnded);
+        prev.removeEventListener("pause", onPaused);
+        prev.removeEventListener("play", onPlaying);
+        prev.removeEventListener("timeupdate", onTimeUpdate);
+      }
+
+      const next = new Audio(newUrl);
+      next.addEventListener("loadeddata", onLoadedData);
+      next.addEventListener("ended", onEnded);
+      next.addEventListener("pause", onPaused);
+      next.addEventListener("play", onPlaying);
+      next.addEventListener("timeupdate", onTimeUpdate);
+
+      audio.current = next;
+      setCurrentTime(0);
+    },
+    [onLoadedData, onEnded, onPaused, onPlaying, onTimeUpdate],
+  );
+
   return {
     play,
     pause,
@@ -93,6 +118,7 @@ function usePlayAudio(audioUrl) {
     seek,
     currentTime,
     duration: totalDuration,
+    changeAudio,
   };
 }
 
