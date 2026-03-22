@@ -71,19 +71,3 @@
   outline: 2px solid #fff;
   box-shadow: 0 0 0 3px rgba(109, 109, 109, 0.25);
 }
-
-.progress-container {
-  width: 100%;
-  background-color: #f3f3f3;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.progress-bar {
-  width: 0%;
-  height: 15px;
-  background-color: #4caf50;
-  text-align: center;
-  line-height: 15px;
-  color: white;
-}

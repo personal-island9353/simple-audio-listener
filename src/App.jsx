@@ -2,6 +2,7 @@ import "@/App.css";
 import usePlayAudio from "@/hooks/usePlayAudio";
 import Pause from "@/icons/Pause";
 import Play from "@/icons/Play";
+import ProgressBar from "./components/ProgressBar";
 
 function App() {
   const { play, pause, playing, progressBar } = usePlayAudio(
@@ -10,9 +11,7 @@ function App() {
 
   return (
     <>
-      <div className="progress-container">
-        <div className="progress-bar" ref={progressBar}></div>
-      </div>
+      <ProgressBar progressBar={progressBar} />
       <button
         className={`play-button ${playing ? "hidden" : ""}`}
         onClick={play}
