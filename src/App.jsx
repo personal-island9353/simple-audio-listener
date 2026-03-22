@@ -1,4 +1,5 @@
 import styles from "@/App.module.css";
+import AudioInput from "@/components/AudioInput";
 import PlayButton from "@/components/PlayButton";
 import ProgressBar from "@/components/ProgressBar";
 import StopButton from "@/components/StopButton";
@@ -30,16 +31,7 @@ function App() {
 
   return (
     <div className={styles.player}>
-      <label htmlFor="audioInput" className={styles.audioLabel}>
-        Audio URL:
-      </label>
-      <input
-        id="audioInput"
-        className={styles.audioInput}
-        type="text"
-        value={audio}
-        onChange={(e) => setAudio(e.target.value)}
-      />
+      <AudioInput audio={audio} setAudio={setAudio} />
       <ProgressBar progressBar={progressBar} seek={seek} />
       <div className={styles.controls}>
         <PlayButton play={play} pause={pause} playing={playing} />
