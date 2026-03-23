@@ -48,9 +48,11 @@ npm run format
 **Project layout**
 
 - [index.html](index.html#L1-L14) — App shell
-- [src/main.jsx](src/main.jsx) — App entry (renderer)
+- [src/renderer.jsx](src/renderer.jsx) — App entry (renderer)
 - [src/hooks/usePlayAudio.js](src/hooks/usePlayAudio.js) — Audio management hook
 - [src/components](src/components) — UI controls and components
+- [electron/main.js](electron/main.js) — Electron main process entry
+- [electron/preload.js](electron/preload.js) — Preload script for renderer
 
 **Contributing**
 
