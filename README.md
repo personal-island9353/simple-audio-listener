@@ -20,19 +20,19 @@ npm install
 2. Run the app (development)
 
 ```bash
-npm start
+npm run dev
 ```
 
-3. Package the app
+3. Build for production
+
+```bash
+npm run build
+```
+
+4. Package the app
 
 ```bash
 npm run package
-```
-
-4. Create distributable builds
-
-```bash
-npm run make
 ```
 
 **Optional commands**
